@@ -1,0 +1,124 @@
+import {
+  ContractEvent,
+  ContractName,
+  EntrypointName,
+  ModuleReference,
+} from "@concordium/web-sdk";
+import { InitMethod } from "./generic-contract";
+
+export const CONTRACT_NAME = "rwa_identity_registry";
+
+export const initErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const addAgentErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const addAgentRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const addIssuerErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const addIssuerRequestSchemaBase64 = "DA==";
+export const agentsErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const agentsResponseSchemaBase64 =
+  "EAIVAgAAAAcAAABBY2NvdW50AQEAAAALCAAAAENvbnRyYWN0AQEAAAAM";
+export const deleteIdentityErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const deleteIdentityRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const getIdentityErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const getIdentityRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const getIdentityResponseSchemaBase64 =
+  "FAACAAAACgAAAGF0dHJpYnV0ZXMQAhQAAgAAAAMAAAB0YWcCBQAAAHZhbHVlFgILAAAAY3JlZGVudGlhbHMQAhQAAgAAAAYAAABpc3N1ZXIMAwAAAGtleR4gAAAA";
+export const hasIdentityErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const hasIdentityRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const hasIdentityResponseSchemaBase64 = "AQ==";
+export const isAgentErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const isAgentRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const isAgentResponseSchemaBase64 = "AQ==";
+export const isIssuerErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const isIssuerRequestSchemaBase64 = "DA==";
+export const isIssuerResponseSchemaBase64 = "AQ==";
+export const isSameErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const isSameRequestSchemaBase64 =
+  "DxUCAAAABwAAAEFjY291bnQBAQAAAAsIAAAAQ29udHJhY3QBAQAAAAwVAgAAAAcAAABBY2NvdW50AQEAAAALCAAAAENvbnRyYWN0AQEAAAAM";
+export const isSameResponseSchemaBase64 = "AQ==";
+export const isVerifiedErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const isVerifiedRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const isVerifiedResponseSchemaBase64 = "AQ==";
+export const issuersErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const issuersResponseSchemaBase64 = "EAIM";
+export const registerIdentityErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const registerIdentityRequestSchemaBase64 =
+  "FAACAAAACAAAAGlkZW50aXR5FAACAAAACgAAAGF0dHJpYnV0ZXMQAhQAAgAAAAMAAAB0YWcCBQAAAHZhbHVlFgILAAAAY3JlZGVudGlhbHMQAhQAAgAAAAYAAABpc3N1ZXIMAwAAAGtleR4gAAAABwAAAGFkZHJlc3MVAgAAAAcAAABBY2NvdW50AQEAAAALCAAAAENvbnRyYWN0AQEAAAAM";
+export const removeAgentErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const removeAgentRequestSchemaBase64 =
+  "FQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADA==";
+export const removeIssuerErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const removeIssuerRequestSchemaBase64 = "DA==";
+export const supportsErrorSchemaBase64 =
+  "FQoAAAAKAAAAUGFyc2VFcnJvcgIIAAAATG9nRXJyb3ICDAAAAFVuYXV0aG9yaXplZAIQAAAASWRlbnRpdHlOb3RGb3VuZAIOAAAASXNzdWVyTm90Rm91bmQCEwAAAElzc3VlckFscmVhZHlFeGlzdHMCEgAAAEFnZW50QWxyZWFkeUV4aXN0cwINAAAAQWdlbnROb3RGb3VuZAINAAAASW52YWxpZElzc3VlcgIRAAAAQ2FsbENvbnRyYWN0RXJyb3IC";
+export const supportsRequestSchemaBase64 = "EAEWAA==";
+export const supportsResponseSchemaBase64 =
+  "EAEVAwAAAAkAAABOb1N1cHBvcnQCBwAAAFN1cHBvcnQCCQAAAFN1cHBvcnRCeQEBAAAAEAAM";
+export const eventSchemaBase64 =
+  "FQYAAAASAAAASWRlbnRpdHlSZWdpc3RlcmVkAQEAAAAVAgAAAAcAAABBY2NvdW50AQEAAAALCAAAAENvbnRyYWN0AQEAAAAMDwAAAElkZW50aXR5UmVtb3ZlZAEBAAAAFQIAAAAHAAAAQWNjb3VudAEBAAAACwgAAABDb250cmFjdAEBAAAADAsAAABJc3N1ZXJBZGRlZAEBAAAADA0AAABJc3N1ZXJSZW1vdmVkAQEAAAAMCgAAAEFnZW50QWRkZWQBAQAAABQAAQAAAAUAAABhZ2VudBUCAAAABwAAAEFjY291bnQBAQAAAAsIAAAAQ29udHJhY3QBAQAAAAwMAAAAQWdlbnRSZW1vdmVkAQEAAAAUAAEAAAAFAAAAYWdlbnQVAgAAAAcAAABBY2NvdW50AQEAAAALCAAAAENvbnRyYWN0AQEAAAAM";
+
+export const ENTRYPOINTS = {
+  addAgent: EntrypointName.fromString("addAgent"),
+  addIssuer: EntrypointName.fromString("addIssuer"),
+  agents: EntrypointName.fromString("agents"),
+  deleteIdentity: EntrypointName.fromString("deleteIdentity"),
+  getIdentity: EntrypointName.fromString("getIdentity"),
+  hasIdentity: EntrypointName.fromString("hasIdentity"),
+  isAgent: EntrypointName.fromString("isAgent"),
+  isIssuer: EntrypointName.fromString("isIssuer"),
+  isSame: EntrypointName.fromString("isSame"),
+  isVerified: EntrypointName.fromString("isVerified"),
+  issuers: EntrypointName.fromString("issuers"),
+  registerIdentity: EntrypointName.fromString("registerIdentity"),
+  removeAgent: EntrypointName.fromString("removeAgent"),
+  removeIssuer: EntrypointName.fromString("removeIssuer"),
+  supports: EntrypointName.fromString("supports"),
+};
+export const ENTRYPOINT_DISPLAY_NAMES = {
+  addAgent: "Add Agent",
+  addIssuer: "Add Issuer",
+  agents: "Agents",
+  deleteIdentity: "Delete Identity",
+  getIdentity: "Get Identity",
+  hasIdentity: "Has Identity",
+  isAgent: "Is Agent",
+  isIssuer: "Is Issuer",
+  isSame: "Is Same",
+  isVerified: "Is Verified",
+  issuers: "Issuers",
+  registerIdentity: "Register Identity",
+  removeAgent: "Remove Agent",
+  removeIssuer: "Remove Issuer",
+  supports: "Supports",
+};
+export const stIdentityRegistry = {
+  init: (moduleReference, contractName) =>
+    new InitMethod(
+      ModuleReference.fromHexString(moduleReference),
+      ContractName.fromString(contractName)
+    ),
+  deserializeEvent: (event) => {
+    return ContractEvent.parseWithSchemaTypeBase64(event, eventSchemaBase64);
+  },
+};
+export default stIdentityRegistry;
