@@ -18,7 +18,10 @@ const WALLET_CONNECT_OPTS = {
 };
 
 const WALLET_CONNECT_SCOPE = {
-  methods: [WalletConnectMethod.SignMessage],
+  methods: [
+    WalletConnectMethod.SignMessage,
+    WalletConnectMethod.SignAndSendTransaction,
+  ],
   events: [WalletConnectEvent.AccountsChanged, WalletConnectEvent.ChainChanged],
 };
 
